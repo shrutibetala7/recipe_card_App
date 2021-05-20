@@ -61,46 +61,74 @@ class _RecipeCardState extends State<RecipeCard> {
             ),
             child: Wrap(
               children: <Widget>[
-                Stack(children: <Widget>[
-                  _section(5.0),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 14, right: 14, top: 8),
-                    child: TextField(
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Stack(children: <Widget>[
+                        _section(
+                          5.0,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 14, right: 14, top: 8),
+                            child: TextField(
+                                style: Theme.of(context).textTheme.bodyText1,
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: titleController,
+                                onChanged: (value) => {
+                                      updateTitle(),
+                                      //dbhelper.colTitle = value,
+                                    }),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                          height: MediaQuery.of(context).size.height / 5.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.teal,
+                          )),
+                    ),
+                  ],
+                ),
+                Stack(children: [
+                  _section(
+                    3.0,
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 14, right: 14, top: 8),
+                      child: TextField(
+                        style: Theme.of(context).textTheme.bodyText1,
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
-                        controller: titleController,
-                        onChanged: (value) => {
-                              updateTitle(),
-                              //dbhelper.colTitle = value,
-                            }),
-                  ),
-                ]),
-                Stack(children: [
-                  _section(3.0),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 14, right: 14, top: 8),
-                    child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      controller: ingredientsController,
-                      onChanged: (value) => updateIngredients(),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.breakfast_dining),
+                        controller: ingredientsController,
+                        onChanged: (value) => updateIngredients(),
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.breakfast_dining),
+                        ),
                       ),
                     ),
                   ),
                 ]),
                 Stack(children: [
-                  _section(1.5),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 14, right: 14, top: 8),
-                    child: TextField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      controller: recipeController,
-                      onChanged: (value) => updateRecipe(),
-                      decoration:
-                          InputDecoration(prefixIcon: Icon(Icons.local_dining)),
+                  _section(
+                    1.5,
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 14, right: 14, top: 8),
+                      child: TextField(
+                        style: Theme.of(context).textTheme.bodyText1,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        controller: recipeController,
+                        onChanged: (value) => updateRecipe(),
+                        decoration: InputDecoration(
+                            prefixIcon: Icon(Icons.local_dining)),
+                      ),
                     ),
                   ),
                 ]),
@@ -112,27 +140,19 @@ class _RecipeCardState extends State<RecipeCard> {
     );
   }
 
-  _section(double proportion) {
+  _section(double proportion, Padding component) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(6.0),
       child: Container(
-        height: MediaQuery.of(context).size.height / proportion,
+        //margin: EdgeInsets.all(5.0),
+        //height: MediaQuery.of(context).size.height / proportion,
         decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          color: Colors.deepPurple[900],
+          // shape: BoxShape.rectangle,
+          color: Colors.deepPurple[100],
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.deepPurple, width: 2.0),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: Container(
-            height: MediaQuery.of(context).size.height / proportion,
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: Colors.deepPurple[50],
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-        ),
+        child: component,
       ),
     );
   }

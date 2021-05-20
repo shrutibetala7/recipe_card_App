@@ -66,58 +66,38 @@ class _RecipeCardListState extends State<RecipeCardList> {
                           actionPane: SlidableDrawerActionPane(),
                           actionExtentRatio: 0.25,
                           actions: <Widget>[
-                            GestureDetector(
-                              onTap: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.redAccent,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.favorite,
-                                        color: Colors.white,
-                                      ),
-                                      Text("Like",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          )),
-                                    ],
-                                  ),
-                                ),
+                            Container(
+                              height: 180,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.redAccent,
+                              ),
+                              child: IconSlideAction(
+                                iconWidget:
+                                    Icon(Icons.favorite, color: Colors.white),
+                                caption: 'Favorite',
+                                closeOnTap: true,
+                                color: Colors.transparent,
+                                onTap: () {},
                               ),
                             ),
                           ],
                           secondaryActions: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                _delete(context, rec[index]);
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.black87,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.delete,
-                                        color: Colors.white,
-                                      ),
-                                      Text("Delete",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          )),
-                                    ],
-                                  ),
-                                ),
+                            Container(
+                              height: 180,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.black,
+                              ),
+                              child: IconSlideAction(
+                                iconWidget:
+                                    Icon(Icons.delete, color: Colors.white),
+                                caption: 'Delete',
+                                closeOnTap: true,
+                                color: Colors.transparent,
+                                onTap: () {
+                                  _delete(context, rec[index]);
+                                },
                               ),
                             ),
                           ],
@@ -150,49 +130,40 @@ class _RecipeCardListState extends State<RecipeCardList> {
                                         borderRadius: BorderRadius.circular(20),
                                         color: Colors.deepPurple[200],
                                       ),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: <Widget>[
-                                            SizedBox(height: 5),
-                                            Text("${this.rec[index].title}",
-                                                style: TextStyle(
-                                                  fontSize: 24,
-                                                )),
-                                            Text("${this.rec[index].date}",
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                )),
-                                            SizedBox(height: 10),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                Text(
-                                                  "Ingredients:",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${this.rec[index].ingredients}",
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                  ),
-                                                  maxLines: 2,
-                                                  softWrap: true,
-                                                ),
-                                              ],
-                                            ),
-                                            Text("Course:",
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                )),
-                                            Text("Cuisine:",
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                )),
-                                          ]),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Column(children: <Widget>[
+                                          SizedBox(height: 5),
+                                          Text(
+                                            "${this.rec[index].title}",
+
+                                            //fontSize: 24,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline1,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          SizedBox(
+                                              width: 40,
+                                              child: Divider(
+                                                thickness: 1,
+                                                color: Colors.black87,
+                                              )),
+                                          Text("${this.rec[index].date}",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline2),
+                                          SizedBox(height: 10),
+                                          Text("Course:",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline2),
+                                          Text("Cuisine:",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline2),
+                                        ]),
+                                      ),
                                     ),
                                   )
                                 ],
